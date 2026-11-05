@@ -1,13 +1,18 @@
 import {test, expect} from  '@playwright/test'
+import { LoginPage } from '../pageobjects/LoginPage'
 //page = fixture
 
 test('Get all usernames registered',async({page}) => {
 
     //await = espere o antes finalice esto
-await page.goto('https://opensource-demo.orangehrmlive.com/')
-await page.getByRole('textbox',{name:'Username'}).fill('Admin')
-await page.getByRole('textbox',{name:'Password'}).fill('admin123')
-await page.getByRole('button',{name:'Login'}).click()
+//await page.goto('https://opensource-demo.orangehrmlive.com/')
+//await page.getByRole('textbox',{name:'Username'}).fill('Admin')
+//await page.getByRole('textbox',{name:'Password'}).fill('admin123')
+//await page.getByRole('button',{name:'Login'}).click()
+
+//Estas dos lineas siguientes resumen las lineas de logeo normales ya que llaman la configuracion realizada en el loginpage.ts
+const loginPage = new LoginPage (page)
+await loginPage.doLogin('Admin','admin123')
 
 await expect(page.getByRole('link',{name:'Admin'})).toBeVisible()
 
